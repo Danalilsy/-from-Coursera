@@ -144,4 +144,3 @@ disp_star: #其他字符，输出'*'
 quit: #读到'？'退出
 	li $v0, 10
 	syscall
-	

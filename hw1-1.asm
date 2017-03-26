@@ -1,6 +1,6 @@
-#µÚÒ»´Î»¥ÆÀ×÷Òµ
-#µÚÒ»Ìâ£ºÓÃÏµÍ³¹¦ÄÜµ÷ÓÃÊµÏÖ¼òµ¥ÊäÈëÊä³ö
-#ÀèË´Ò¢ 1500012934
+#ç¬¬ä¸€æ¬¡äº’è¯„ä½œä¸š
+#ç¬¬ä¸€é¢˜ï¼šç”¨ç³»ç»ŸåŠŸèƒ½è°ƒç”¨å®ç°ç®€å•è¾“å…¥è¾“å‡º
+#é»èˆœå°§ 1500012934
 	.data
 A: .asciiz "Alpha "
 B_: .asciiz "Bravo "
@@ -75,47 +75,47 @@ star: .asciiz "* "
 	.text
 	.globl main
 main:	
-	li $s0, 'z' #ÉèÖÃĞ¡Ğ´×ÖÄ¸±ß½ç
+	li $s0, 'z' #è®¾ç½®å°å†™å­—æ¯è¾¹ç•Œ
 	li $s1, 'a'
-	li $s2, 'Z' #ÉèÖÃ´óĞ´×ÖÄ¸±ß½ç
+	li $s2, 'Z' #è®¾ç½®å¤§å†™å­—æ¯è¾¹ç•Œ
 	li $s3, 'A'
-	li $s4, '9' #ÉèÖÃÊı×Ö±ß½ç
+	li $s4, '9' #è®¾ç½®æ•°å­—è¾¹ç•Œ
 	li $s5, '0'
 getchar:
 	li $v0, 12 
-	syscall	#12ºÅÏµÍ³µ÷ÓÃ£¬¶ÁÈëÒ»¸ö×Ö·ûµ½v0
-	#ÅĞ¶ÏÊÇ²»ÊÇ'£¿'
+	syscall	#12å·ç³»ç»Ÿè°ƒç”¨ï¼Œè¯»å…¥ä¸€ä¸ªå­—ç¬¦åˆ°v0
+	#åˆ¤æ–­æ˜¯ä¸æ˜¯'ï¼Ÿ'
 	li $t0, '?'
 	beq $v0, $t0, quit #v0 == '?'
-	#ÅĞ¶ÏÊÇ²»ÊÇĞ¡Ğ´×ÖÄ¸
+	#åˆ¤æ–­æ˜¯ä¸æ˜¯å°å†™å­—æ¯
 	slt $t0, $s0, $v0 
 	bnez $t0, disp_star #v0 > 'z'
 	slt $t0, $v0, $s1 
 	beq $t0, $0, disp_alpha #v0 >= 'a'
-	#ÅĞ¶ÏÊÇ²»ÊÇ´óĞ´×ÖÄ¸
+	#åˆ¤æ–­æ˜¯ä¸æ˜¯å¤§å†™å­—æ¯
 	slt $t0, $s2, $v0
 	bnez $t0, disp_star #v0 > 'Z'
 	slt $t0, $v0, $s3
 	beq $t0, $0, disp_alpha_c #v0 >= 'A'
-	#ÅĞ¶ÏÊÇ²»ÊÇÊı×Ö
+	#åˆ¤æ–­æ˜¯ä¸æ˜¯æ•°å­—
 	slt $t0, $s4, $v0
 	bnez $t0, disp_star #v0 > '9'
 	slt $t0, $v0, $s5
 	beq $t0, $0, disp_num #v0 >= '0' 
 	
-	j disp_star #ÆäÓà×Ö·û£¬¾ùÊä³ö'*'
+	j disp_star #å…¶ä½™å­—ç¬¦ï¼Œå‡è¾“å‡º'*'
 	
-disp_alpha: #´¦ÀíĞ¡Ğ´×ÖÄ¸
+disp_alpha: #å¤„ç†å°å†™å­—æ¯
 	sub $v0, $v0, $s1 #v0 -= 'a'
-	sll $v0, $v0, 2 #MIPSÖĞwordÎª4×Ö½Ú
+	sll $v0, $v0, 2 #MIPSä¸­wordä¸º4å­—èŠ‚
 	la $t0, alphabet
 	add $t0, $t0, $v0
 	lw $a0, ($t0)
-	li $v0, 4 #4ºÅÏµÍ³µ÷ÓÃ£¬´òÓ¡×Ö·û´®
+	li $v0, 4 #4å·ç³»ç»Ÿè°ƒç”¨ï¼Œæ‰“å°å­—ç¬¦ä¸²
 	syscall
 	j getchar
 
-disp_alpha_c: #´¦Àí´óĞ´×ÖÄ¸
+disp_alpha_c: #å¤„ç†å¤§å†™å­—æ¯
 	sub $v0, $v0, $s3 #v0 -= 'A'
 	sll $v0, $v0, 2
 	la $t0, alphabet_captain
@@ -125,7 +125,7 @@ disp_alpha_c: #´¦Àí´óĞ´×ÖÄ¸
 	syscall
 	j getchar
 
-disp_num: #´¦ÀíÊı×Ö
+disp_num: #å¤„ç†æ•°å­—
 	sub $v0, $v0, $s5 #v0 -= '0'
 	sll $v0, $v0, 2
 	la $t0, number
@@ -135,12 +135,13 @@ disp_num: #´¦ÀíÊı×Ö
 	syscall
 	j getchar
 	
-disp_star: #ÆäËû×Ö·û£¬Êä³ö'*'
+disp_star: #å…¶ä»–å­—ç¬¦ï¼Œè¾“å‡º'*'
 	la $a0, star
 	li $v0, 4
 	syscall
 	j getchar
 	
-quit: #¶Áµ½'£¿'ÍË³ö
-	
+quit: #è¯»åˆ°'ï¼Ÿ'é€€å‡º
+	li $v0, 10
+	syscall
 	
